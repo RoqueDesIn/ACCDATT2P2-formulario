@@ -5,32 +5,31 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class RstDelete {
-	// estados
+public class DaoExecuteQuery {
 	private Connection cn;
 	
-	// comportamientos
 	/*
-	 * Constructor con una conexión como parámetro
+	 * Constructor con una conexión 
 	 */
-	public RstDelete(Connection cn) {
+	public DaoExecuteQuery(Connection cn) {
 		this.cn = cn;
 	}
 	
 	/**
-	 * realiza un delete y devuelve un booleano
+	 * realiza una select y devuelve un resulset
 	 * @return
 	 */
-	public boolean deleteRun (String sqlString) {
-		boolean rst=false;
+	public ResultSet executeQuerytRun (String miSql) {
+		ResultSet rst=null;
 		// creamos el Resulset
 		try {
 			Statement stm  = cn.createStatement(ResultSet.CONCUR_READ_ONLY,ResultSet.CONCUR_UPDATABLE);
-			rst = stm.execute(sqlString);
+			rst = stm.executeQuery(miSql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return rst;
 	}
+	
+
 }

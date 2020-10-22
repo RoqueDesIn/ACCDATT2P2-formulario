@@ -5,31 +5,32 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class RstSelect {
+public class DaoExecute {
+	// estados
 	private Connection cn;
 	
+	// comportamientos
 	/*
-	 * Constructor con una conexión 
+	 * Constructor con una conexión como parámetro
 	 */
-	public RstSelect(Connection cn) {
+	public DaoExecute(Connection cn) {
 		this.cn = cn;
 	}
 	
 	/**
-	 * realiza una select y devuelve un resulset
+	 * realiza un delete y devuelve un booleano
 	 * @return
 	 */
-	public ResultSet selectRun (String miSql) {
-		ResultSet rst=null;
+	public boolean executeRun (String sqlString) {
+		boolean rst=false;
 		// creamos el Resulset
 		try {
 			Statement stm  = cn.createStatement(ResultSet.CONCUR_READ_ONLY,ResultSet.CONCUR_UPDATABLE);
-			rst = stm.executeQuery(miSql);
+			rst = stm.execute(sqlString);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return rst;
 	}
-	
-
 }

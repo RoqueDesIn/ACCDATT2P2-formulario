@@ -16,10 +16,10 @@ import java.awt.event.MouseListener;
 
 public class GUI {
 
-	private static JFrame frame;
-	private static JTextField TFCAsignatura;
-	private static JTextField TFIdProfesor;
-	private static JTextField TFNombreAsignatura;
+	private  JFrame frame;
+	private  JTextField TFCAsignatura;
+	private  JTextField TFIdProfesor;
+	private  JTextField TFNombreAsignatura;
 	private MouseListener miMouseListener;
 	
 
@@ -123,7 +123,7 @@ public class GUI {
 		panelBotonera.add(BTNuevo);
 		
 		JButton BTGuardar = new JButton("Guardar");
-		BTNuevo.addActionListener(new MiMouseListener());;
+		BTGuardar.addActionListener(new MiMouseListener());;
 		panelBotonera.add(BTGuardar);
 		
 		JButton BTSiguiente = new JButton("Siguiente");
@@ -141,7 +141,7 @@ public class GUI {
 	 * get texto Código asignatura
 	 * @return
 	 */
-	public static JTextField getTFCAsignatura() {
+	public  JTextField getTFCAsignatura() {
 		return TFCAsignatura;
 	}
 
@@ -149,7 +149,7 @@ public class GUI {
 	 * get texto Id Profesor
 	 * @return
 	 */
-	public static JTextField getTFIdProfesor() {
+	public  JTextField getTFIdProfesor() {
 		return TFIdProfesor;
 	}
 	
@@ -157,7 +157,7 @@ public class GUI {
 	 * get texto Nombre Asignatura
 	 * @return
 	 */
-	public static JTextField getTFNombreAsignatura() {
+	public  JTextField getTFNombreAsignatura() {
 		return TFNombreAsignatura;
 	}
 
@@ -173,7 +173,7 @@ public class GUI {
 	 * get Frame
 	 * @return
 	 */
-	public static JFrame getFrame() {
+	public  JFrame getFrame() {
 		return frame;
 	}
 

@@ -48,13 +48,15 @@ public abstract class Controlador {
 
 	}
 	/**
-	 * Carga un registro del formulario desde el resultset
+	 * Carga un registro del formulario desde el resultset en los textos de la GUI
 	 */
 	public static void cargaRegistro() {
 		try {
 			miGui.getTFCAsignatura().setText(Integer.toString(miRst.getInt(1)));
 			miGui.getTFIdProfesor().setText(Integer.toString(miRst.getInt(3)));
 			miGui.getTFNombreAsignatura().setText(miRst.getString(2));
+			// refresca el label de control de registros
+			updateLBReg();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,6 +64,41 @@ public abstract class Controlador {
 		}
 	}
 	
+	private static void updateLBReg() {
+		String miStr=null;
+		try {
+			// guarda registro actual
+			int regAct=miRst.getRow();
+			// refresca el label
+			miStr = " Registro " + String.valueOf(miRst.getRow()) +  " de " 
+					+ cuentaReg() +".                                   ";
+			//recupera el registro en curso
+			miRst.absolute(regAct);
+			miGui.getLBRegistros().setText(miStr);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	
+	}
+	
+	/**
+	 * Ddevuelve un int con el número de registros en un resulset
+	 * @return
+	 */
+	private static int cuentaReg() {
+		int resultado=0;
+		
+		try {
+			miRst.first();
+			while (miRst.next()) {
+				resultado++;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultado;
+	}
 	/*
 	 * refresca el resulset
 	 */

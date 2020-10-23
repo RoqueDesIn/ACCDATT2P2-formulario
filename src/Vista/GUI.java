@@ -7,10 +7,13 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.Dimension;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
+
 import java.awt.FlowLayout;
 import java.awt.event.MouseListener;
 
@@ -21,8 +24,13 @@ public class GUI {
 	private  JTextField TFIdProfesor;
 	private  JTextField TFNombreAsignatura;
 	private MouseListener miMouseListener;
-	
-
+	private JButton BTNuevo;
+	private JButton BTPrimero;
+	private JButton BTultimo;
+	private JButton BTSiguiente;
+	private JButton BTAnterior;
+	private JButton BTBorra;
+	private JLabel LBRegistros;
 
 	/**
 	 * Create the application.
@@ -37,7 +45,7 @@ public class GUI {
 	private void initialize() {
 		// frame principal
 		frame = new JFrame();
-		frame.setBounds(100, 100, 578, 221);
+		frame.setBounds(100, 100, 489, 245);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		
@@ -50,11 +58,6 @@ public class GUI {
 		lblNewLabel.setForeground(Color.BLUE);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panelTítulo.add(lblNewLabel);
-		
-		//panel principal
-		JPanel panelPrincipal = new JPanel();
-		frame.getContentPane().add(panelPrincipal);
-		panelPrincipal.setLayout(new BoxLayout(panelPrincipal, BoxLayout.Y_AXIS));
 			
 			//panel para el código de asignatura
 			JPanel panelCasignatura = new JPanel();
@@ -89,7 +92,7 @@ public class GUI {
 			JPanel panelidProfesor = new JPanel();
 			FlowLayout flowLayout_2 = (FlowLayout) panelidProfesor.getLayout();
 			flowLayout_2.setAlignment(FlowLayout.LEFT);
-			panelidProfesor.setMaximumSize(new Dimension(500,30));
+			panelidProfesor.setMaximumSize(new Dimension(500,50));
 			frame.getContentPane().add(panelidProfesor);
 			
 			JLabel LANombreAsig = new JLabel("Nombre");
@@ -100,41 +103,126 @@ public class GUI {
 			TFNombreAsignatura.setColumns(40);
 		
 		// Panel para la botonera
+		JPanel panelBotoneras = new JPanel();
+		panelBotoneras.setMaximumSize(new Dimension(1000, 60));
+		frame.getContentPane().add(panelBotoneras);;;
+		panelBotoneras.setLayout(new BoxLayout(panelBotoneras, BoxLayout.Y_AXIS));
+		
 		JPanel panelBotonera = new JPanel();
-		panelBotonera.setMaximumSize(new Dimension(1000, 60));
-		frame.getContentPane().add(panelBotonera);
-		panelBotonera.setLayout(new BoxLayout(panelBotonera, BoxLayout.X_AXIS));
+		panelBotoneras.add(panelBotonera);
 		
-		panelBotonera.add(Box.createRigidArea(new Dimension(10, 0)));
-		JButton BTPrimero = new JButton("Primero");
-		BTPrimero.addActionListener(new MiMouseListener());;
-		panelBotonera.add(BTPrimero);
-		
-		JButton BTAnterior = new JButton("Anterior");
-		BTAnterior.addActionListener(new MiMouseListener());;
-		panelBotonera.add(BTAnterior);
-		
-		JButton BTBorra = new JButton("Borrar");
-		BTBorra.addActionListener(new MiMouseListener());;
+		BTBorra = new JButton("Borrar");
 		panelBotonera.add(BTBorra);
 		
-		JButton BTNuevo = new JButton("Nuevo");
-		BTNuevo.addActionListener(new MiMouseListener());;
-		panelBotonera.add(BTNuevo);
-		
 		JButton BTGuardar = new JButton("Guardar");
-		BTGuardar.addActionListener(new MiMouseListener());;
 		panelBotonera.add(BTGuardar);
 		
-		JButton BTSiguiente = new JButton("Siguiente");
-		BTSiguiente.addActionListener(new MiMouseListener());;
-		panelBotonera.add(BTSiguiente);
+		BTNuevo = new JButton("Nuevo");
+		panelBotonera.add(BTNuevo);
+		BTNuevo.addActionListener(new MiMouseListener());
+		BTGuardar.addActionListener(new MiMouseListener());
+		BTBorra.addActionListener(new MiMouseListener());
 		
-		JButton BTultimo = new JButton("\u00DAltimo");
-		BTultimo.addActionListener(new MiMouseListener());;
-		panelBotonera.add(BTultimo);
+		// panel registros
+		JPanel panelRegistros = new JPanel();
+		panelBotoneras.add(panelRegistros);
+		
+		panelRegistros.setLayout(new FlowLayout(FlowLayout.CENTER, 1, 1));
+		BTPrimero = new JButton("<<");
+		BTPrimero.setToolTipText("Primer registro.");
+		BTPrimero.setForeground(Color.RED);
+		BTPrimero.setFont(new Font("Tahoma", Font.BOLD, 8));
+		panelRegistros.add(BTPrimero);
+		
+		BTAnterior = new JButton("<");
+		BTAnterior.setToolTipText("Registro anterior.");
+		BTAnterior.setForeground(Color.RED);
+		BTAnterior.setFont(new Font("Tahoma", Font.BOLD, 8));
+		panelRegistros.add(BTAnterior);
+		
+		LBRegistros = new JLabel(" No se han encontrado registros.                     ");
+		LBRegistros.setBackground(Color.WHITE);
+		Border bordeRegistros = BorderFactory.createLineBorder(Color.BLUE,1);
+		LBRegistros.setBorder(bordeRegistros);
+
+		panelRegistros.add(LBRegistros);
+		
 
 		
+		
+		BTSiguiente = new JButton(">");
+		BTSiguiente.setToolTipText("Registro siguiente.");
+		BTSiguiente.setForeground(Color.RED);
+		BTSiguiente.setFont(new Font("Tahoma", Font.BOLD, 8));
+		panelRegistros.add(BTSiguiente);
+		
+		BTultimo = new JButton(">>");
+		BTultimo.setToolTipText("\u00DAltimo registro.");
+		BTultimo.setForeground(Color.RED);
+		BTultimo.setFont(new Font("Tahoma", Font.BOLD, 8));
+		panelRegistros.add(BTultimo);
+		BTultimo.addActionListener(new MiMouseListener());
+		BTSiguiente.addActionListener(new MiMouseListener());
+		BTAnterior.addActionListener(new MiMouseListener());
+		BTPrimero.addActionListener(new MiMouseListener());;;;;;
+		
+	}
+	
+	// GETTERS AND SETTERS
+	/**
+	 * get Label controls de registros
+	 * @return
+	 */
+	public  JLabel getLBRegistros() {
+		return LBRegistros;
+	}
+	/**
+	 * get texto Botón Borra
+	 * @return
+	 */
+	public  JButton getBTBorra() {
+		return BTBorra;
+	}
+	
+	/**
+	 * get texto Botón Nuevo
+	 * @return
+	 */
+	public  JButton getBTNuevo() {
+		return BTNuevo;
+	}
+	
+	/**
+	 * get texto Botón primero
+	 * @return
+	 */
+	public  JButton getBTPrimero() {
+		return BTPrimero;
+	}
+	
+	
+	/**
+	 * get texto Botón último
+	 * @return
+	 */
+	public  JButton getBTUltimo() {
+		return BTultimo;
+	}
+	
+	/**
+	 * get texto Botón siguiente
+	 * @return
+	 */
+	public  JButton getBTSiguiente() {
+		return BTSiguiente;
+	}
+	
+	/**
+	 * get texto Botón anterior
+	 * @return
+	 */
+	public  JButton getBTAnterior() {
+		return BTAnterior;
 	}
 
 	/**

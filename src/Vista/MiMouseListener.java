@@ -23,7 +23,7 @@ public class MiMouseListener implements ActionListener {
 		switch  (miboton.getText()) {
 			//carga primer registro
 		//******************************
-			case "Primero":
+			case "<<":
 				// al primer registro
 				try {
 					Controlador.getMiRst().first();
@@ -36,7 +36,7 @@ public class MiMouseListener implements ActionListener {
 			
 			// al registro anterior
 					//*************************
-			case "Anterior":
+			case "<":
 				// al registro anterior
 				try {
 					// Ya estamos en el primer registro
@@ -57,20 +57,24 @@ public class MiMouseListener implements ActionListener {
 				//******************
 			case "Borrar":
 				// Borrar registro
-				try {
-					// Borramos el registro
-					DaoExecute miRstDel = Controlador.getExe();
-					String miSql = "delete from asignatura where codAsignatura = '"+Controlador.getMiRst().getInt(1)+"'";
-					miRstDel.executeRun(miSql);
-					// borramos del rst
-					Controlador.getMiRst().deleteRow();
-					Controlador.getMiRst().first();
-					Controlador.cargaRegistro();
-					;
-				} catch (SQLException e3) {
-					// TODO Auto-generated catch block
-					e3.printStackTrace();
+				int okSeguro = JOptionPane.showConfirmDialog(Controlador.getMiGui().getFrame(),"Se borrará el registro seleccionado. ¿Está seguro?");
+				if (okSeguro==JOptionPane.YES_OPTION) {
+					try {
+						// Borramos el registro
+						DaoExecute miRstDel = Controlador.getExe();
+						String miSql = "delete from asignatura where codAsignatura = '"+Controlador.getMiRst().getInt(1)+"'";
+						miRstDel.executeRun(miSql);
+						// borramos del rst
+						Controlador.getMiRst().deleteRow();
+						Controlador.getMiRst().first();
+						Controlador.cargaRegistro();
+						;
+					} catch (SQLException e3) {
+						// TODO Auto-generated catch block
+						e3.printStackTrace();
+					}
 				}
+				
 				break;
 			
 			// nuevo registro
@@ -80,6 +84,8 @@ public class MiMouseListener implements ActionListener {
 				Controlador.getMiGui().getTFCAsignatura().setText("");;
 				Controlador.getMiGui().getTFIdProfesor().setText("");;
 				Controlador.getMiGui().getTFNombreAsignatura().setText("");;
+				// deshabilita botones
+				cambiaEstadoBT(false);
 				break;
 			
 				// guardar registro
@@ -87,12 +93,14 @@ public class MiMouseListener implements ActionListener {
 			case "Guardar":
 				boolean okComprobar=false;
 				okComprobar=compruebaTexto();
-				if (okComprobar) guardar();
-				
-			break;
+				if (okComprobar) {
+					guardar();
+					cambiaEstadoBT(true);
+				}
+				break;
 			
 			// registro siguiente
-			case "Siguiente":
+			case ">":
 				// al registro siguiente
 				try {
 					if (Controlador.getMiRst().next()==false) {
@@ -107,7 +115,7 @@ public class MiMouseListener implements ActionListener {
 				};
 				break;
 					
-			case "Último":
+			case ">>":
 				// al último registro
 				try {
 						Controlador.getMiRst().last();
@@ -122,6 +130,19 @@ public class MiMouseListener implements ActionListener {
 		};
 	}
 	
+	/**
+	 * habilita/deshabilita botones
+	 * @param b
+	 */
+	private void cambiaEstadoBT(boolean b) {
+		Controlador.getMiGui().getBTBorra().setEnabled(b);
+		Controlador.getMiGui().getBTNuevo().setEnabled(b);
+		Controlador.getMiGui().getBTPrimero().setEnabled(b);
+		Controlador.getMiGui().getBTUltimo().setEnabled(b);
+		Controlador.getMiGui().getBTSiguiente().setEnabled(b);
+		Controlador.getMiGui().getBTAnterior().setEnabled(b);		
+	}
+
 	/**
 	 * comprueba que el texto no sea nulo
 	 * @return verdadero si es todo correcto, falso si ha habido error

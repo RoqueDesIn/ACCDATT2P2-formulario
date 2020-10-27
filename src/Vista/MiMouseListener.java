@@ -15,7 +15,25 @@ import DAO.DaoExecute;
 import DAO.DaoExecuteQuery;
 
 public class MiMouseListener implements ActionListener {
+	/**
+
+	 * Esta clase define el objeto 
+	 * que captura el click del ratón en la GUI.
+
+	 * @author Roque Flores Naranjo
+	 * 
+	 * @version 27/10/2020-1.0
+
+	 * @see <a href = "https://www.linkedin.com/in/roque-flores-naranjo/" /> Mi LinkEdin :) </a>
+
+	 */
+	//estados
 	
+	// comportamientos
+	
+	/**
+	 * define la ejecución en el evento click del raton 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton miboton = (JButton) e.getSource();
@@ -224,6 +242,5 @@ public class MiMouseListener implements ActionListener {
 		e2.printStackTrace();
 	}		
 	}
-
 
 }

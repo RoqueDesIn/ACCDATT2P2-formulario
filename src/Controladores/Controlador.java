@@ -9,17 +9,38 @@ import DAO.Conexion;
 import DAO.DaoExecute;
 import DAO.DaoExecuteQuery;
 import Vista.GUI;
+/**
+
+ * Esta clase define el objeto controlador de la aplicación.
+
+ * @author Roque Flores Naranjo
+ * 
+ * @version 27/10/2020-1.0
+
+ * @see <a href = "https://www.linkedin.com/in/roque-flores-naranjo/" /> Mi LinkEdin :) </a>
+
+ */
 
 public abstract class Controlador {
+	//estados
 	private static Connection cn;
 	private static ResultSet miRst;
 	private static DaoExecute miExe;
 	private static GUI miGui;
 	private static DaoExecuteQuery miRstSelect;
 	
+	//comportamientos
+	/**
+	 * Constructor vacio
+	 */
 	public Controlador() {
 
 	}
+	
+	/**
+	 * Módulo principal, Conecta con la BD, 
+	 * extrae el Resulset, crea el DAO y la GUI
+	 */
 	public static void conectar () {
 		//creamos la conexión
 		Conexion miConexion = new Conexion();
@@ -47,6 +68,7 @@ public abstract class Controlador {
 		}
 
 	}
+	
 	/**
 	 * Carga un registro del formulario desde el resultset en los textos de la GUI
 	 */
@@ -64,6 +86,9 @@ public abstract class Controlador {
 		}
 	}
 	
+	/**
+	 * Modifica label de control de registros
+	 */
 	private static void updateLBReg() {
 		String miStr=null;
 		try {
@@ -86,7 +111,7 @@ public abstract class Controlador {
 	 * @return
 	 */
 	private static int cuentaReg() {
-		int resultado=0;
+		int resultado=1;
 		
 		try {
 			miRst.first();
@@ -140,16 +165,21 @@ public abstract class Controlador {
 		return miGui;
 	}
 
+
+	
 	/**
-	 * get miGui
+	 * get miRstSelect
 	 * @return
 	 */
-	public static DaoExecuteQuery getmiRstSelect() {
-		return getMiRstSelect();
-	}
 	public static DaoExecuteQuery getMiRstSelect() {
 		return miRstSelect;
 	}
+	
+	// setters
+	/**
+	 * get setMiRstSelect
+	 * @return
+	 */
 	public static void setMiRstSelect(DaoExecuteQuery miRstSelect) {
 		Controlador.miRstSelect = miRstSelect;
 	}

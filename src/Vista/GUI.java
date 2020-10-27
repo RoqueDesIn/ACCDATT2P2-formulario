@@ -18,7 +18,19 @@ import java.awt.FlowLayout;
 import java.awt.event.MouseListener;
 
 public class GUI {
+	/**
 
+	 * Esta clase define el objeto window principal de la GUI.
+
+	 * @author Roque Flores Naranjo
+	 * 
+	 * @version 27/10/2020-1.0
+
+	 * @see <a href = "https://www.linkedin.com/in/roque-flores-naranjo/" /> Mi LinkEdin :) </a>
+
+	 */
+	
+	// estados
 	private  JFrame frame;
 	private  JTextField TFCAsignatura;
 	private  JTextField TFIdProfesor;
@@ -33,14 +45,14 @@ public class GUI {
 	private JLabel LBRegistros;
 
 	/**
-	 * Create the application.
+	 * inicializa la GUI.
 	 */
 	public GUI() {
 		initialize();
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 *Inicializa contenidos del frame.
 	 */
 	private void initialize() {
 		// frame principal
